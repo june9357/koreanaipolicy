@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>대한민국 AI G3 도약 - 국가 AI 정책 포털</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Google Fonts: Pretendard -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'sans-serif'],
+          },
+          colors: {
+            mono: {
+              50: '#fafafa',
+              100: '#f4f4f5',
+              200: '#e4e4e7',
+              300: '#d4d4d8',
+              400: '#a1a1aa',
+              500: '#71717a',
+              600: '#52525b',
+              700: '#3f3f46',
+              800: '#27272a',
+              850: '#1e1e22',
+              900: '#18181b',
+              950: '#09090b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Pretendard', sans-serif;
+      word-break: keep-all;
+      background-color: #09090b;
+      color: #e4e4e7;
+    }
+    .glass-nav {
+      background: rgba(9, 9, 11, 0.9);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card {
+      background: rgba(24, 24, 27, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.7);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 0%, #e4e4e7 45%, #a1a1aa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    /* Subtle minimalist scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #09090b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #27272a;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3f3f46;
+    }
+  </style>
+</head>
+<body class="bg-[#09090b] text-zinc-200 min-h-screen flex flex-col selection:bg-zinc-100 selection:text-black">
+
+  <!-- ==================== HEADER & NAVIGATION ==================== -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300" id="mainHeader">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-white text-black flex items-center justify-center font-black shadow-md group-hover:bg-zinc-200 transition-colors">
+          <i class="fa-solid fa-microchip text-lg"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-xl tracking-tight text-white">대한민국 AI 정책관</span>
+            <span class="text-[11px] px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-300 font-semibold border border-zinc-700">AI G3 도약</span>
+          </div>
+          <p class="text-xs text-zinc-400 hidden sm:block">K-AI Initiative & National Policy Portal</p>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Menu -->
+      <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-zinc-400">
+        <a href="#vision" class="hover:text-white transition-colors">국가 비전</a>
+        <a href="#governance" class="hover:text-white transition-colors">컨트롤타워</a>
+        <a href="#policies" class="hover:text-white transition-colors">6대 핵심정책</a>
+        <a href="#basic-act" class="hover:text-white transition-colors">인공지능기본법</a>
+        <a href="#infrastructure" class="hover:text-white transition-colors">소버린 AI 인프라</a>
+        <a href="#roadmap" class="hover:text-white transition-colors">추진 로드맵</a>
+        <a href="#interactive" class="hover:text-white transition-colors">맞춤형 지원찾기</a>
+      </nav>
+
+      <!-- Action Button & Mobile Toggle -->
+      <div class="flex items-center gap-3">
+        <button onclick="openModal('summaryModal')" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 text-sm font-semibold shadow-sm transition-all hover:scale-[1.02]">
+          <i class="fa-solid fa-file-lines text-xs"></i>
+          <span>정책 핵심 리포트</span>
+        </button>
+        <button id="mobileMenuBtn" class="lg:hidden text-zinc-400 hover:text-white p-2 text-xl" aria-label="메뉴 열기">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-zinc-950/95 border-b border-zinc-800 px-6 py-4 space-y-3 text-sm">
+      <a href="#vision" class="block py-2 text-zinc-300 hover:text-white">국가 비전</a>
+      <a href="#governance" class="block py-2 text-zinc-300 hover:text-white">컨트롤타워</a>
+      <a href="#policies" class="block py-2 text-zinc-300 hover:text-white">6대 핵심정책</a>
+      <a href="#basic-act" class="block py-2 text-zinc-300 hover:text-white">인공지능기본법</a>
+      <a href="#infrastructure" class="block py-2 text-zinc-300 hover:text-white">소버린 AI 인프라</a>
+      <a href="#roadmap" class="block py-2 text-zinc-300 hover:text-white">추진 로드맵</a>
+      <a href="#interactive" class="block py-2 text-zinc-300 hover:text-white">맞춤형 지원찾기</a>
+      <div class="pt-2 border-t border-zinc-800">
+        <button onclick="openModal('summaryModal')" class="w-full text-center py-2.5 rounded-lg bg-white text-zinc-950 font-semibold">
+          정책 핵심 요약문 보기
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow pt-20">
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="vision" class="relative overflow-hidden pt-16 pb-24 lg:pt-28 lg:pb-32">
+      <!-- Subtle Monochrome Ambient Light -->
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-zinc-800/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center max-w-3xl mx-auto">
+          <!-- Monochromatic Badge -->
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900 border border-zinc-700 text-zinc-300 text-xs sm:text-sm font-medium mb-6">
+            <span class="w-2 h-2 rounded-full bg-zinc-400"></span>
+            대한민국 국가 AI 대전환(AX) 총력 비전
+          </div>
+          
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight sm:leading-tight lg:leading-tight mb-6">
+            세계 <span class="gradient-text">AI 3대 강국(G3)</span>으로<br>
+            도약하는 대한민국
+          </h1>
+          
+          <p class="text-base sm:text-lg lg:text-xl text-zinc-400 font-light leading-relaxed mb-10">
+            대통령 직속 <strong class="text-zinc-100 font-medium">국가인공지능전략위원회</strong> 출범, 
+            제도적 신뢰를 완성한 <strong class="text-zinc-100 font-medium">인공지능기본법</strong>, 
+            그리고 독자 기술 주권을 수호하는 <strong class="text-zinc-100 font-medium">소버린 AI 인프라</strong>까지.<br class="hidden sm:inline">
+            대한민국의 미래 100년을 이끌 차분하고 견고한 국가 혁신 생태계를 소개합니다.
+          </p>
+
+          <!-- Action Buttons (High Contrast Monochrome) -->
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="#policies" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white hover:bg-zinc-200 text-zinc-950 font-bold text-base shadow-sm transition-all hover:scale-[1.02] flex items-center justify-center gap-2">
+              <span>6대 핵심 정책 탐색</span>
+              <i class="fa-solid fa-arrow-right text-sm"></i>
+            </a>
+            <a href="#interactive" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-zinc-700 font-semibold text-base transition-all flex items-center justify-center gap-2">
+              <i class="fa-solid fa-sliders text-zinc-400"></i>
+              <span>맞춤 정책 진단기</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Key Stat Numbers Grid (Monochrome) -->
+        <div class="mt-16 sm:mt-20 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-5xl mx-auto">
+          <div class="glass-card rounded-2xl p-6 text-center">
+            <div class="text-zinc-300 text-2xl sm:text-3xl mb-1"><i class="fa-solid fa-trophy"></i></div>
+            <div class="text-3xl sm:text-4xl font-black text-white mb-1">Global G3</div>
+            <div class="text-xs sm:text-sm text-zinc-400 font-medium">글로벌 AI 3대 강국 진입 목표</div>
+          </div>
+          <div class="glass-card rounded-2xl p-6 text-center">
+            <div class="text-zinc-300 text-2xl sm:text-3xl mb-1"><i class="fa-solid fa-coins"></i></div>
+            <div class="text-3xl sm:text-4xl font-black text-white mb-1">65조 원+</div>
+            <div class="text-xs sm:text-sm text-zinc-400 font-medium">민·관 합동 투자 생태계 조성</div>
+          </div>
+          <div class="glass-card rounded-2xl p-6 text-center">
+            <div class="text-zinc-300 text-2xl sm:text-3xl mb-1"><i class="fa-solid fa-scale-balanced"></i></div>
+            <div class="text-3xl sm:text-4xl font-black text-white mb-1">AI 기본법</div>
+            <div class="text-xs sm:text-sm text-zinc-400 font-medium">산업 진흥 & 안전성 제도 확립</div>
+          </div>
+          <div class="glass-card rounded-2xl p-6 text-center">
+            <div class="text-zinc-300 text-2xl sm:text-3xl mb-1"><i class="fa-solid fa-server"></i></div>
+            <div class="text-3xl sm:text-4xl font-black text-white mb-1">1 EF+</div>
+            <div class="text-xs sm:text-sm text-zinc-400 font-medium">국가 AI 컴퓨팅 자원 확충</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 1: GOVERNANCE ==================== -->
+    <section id="governance" class="py-20 bg-zinc-950/70 border-y border-zinc-800/80 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+          <!-- Left Content -->
+          <div class="lg:w-1/2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 text-zinc-300 text-xs font-semibold uppercase mb-4 border border-zinc-700">
+              <i class="fa-solid fa-sitemap text-zinc-400"></i> Governance System
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-5">
+              국가 AI 컨트롤타워,<br>
+              <span class="gradient-text">국가인공지능전략위원회</span> 출범
+            </h2>
+            <p class="text-zinc-400 leading-relaxed mb-6">
+              부처별로 분산되었던 AI 관련 정책을 통합 조율하기 위해 대통령을 위원장으로 하는 국가 최고 의사결정 기구가 가동되었습니다. 민간 최고 전문가와 관계 부처 장관들이 원팀을 구성하여 신속하고 일관된 추진력을 발휘합니다.
+            </p>
+
+            <div class="space-y-4">
+              <div class="flex items-start gap-4 p-4 rounded-xl bg-zinc-900/60 border border-zinc-800">
+                <div class="w-10 h-10 rounded-lg bg-zinc-800 text-zinc-200 flex items-center justify-center shrink-0 mt-0.5 border border-zinc-700">
+                  <i class="fa-solid fa-bolt text-base"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-white text-base">범부처 정책 총괄 및 신속 조정</h4>
+                  <p class="text-sm text-zinc-400 mt-1">과기정통부, 산업부, 중기부 등 각 부처 칸막이를 제거하고 국가 R&D와 마중물 예산 배분의 컨트롤타워 수행</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4 p-4 rounded-xl bg-zinc-900/60 border border-zinc-800">
+                <div class="w-10 h-10 rounded-lg bg-zinc-800 text-zinc-200 flex items-center justify-center shrink-0 mt-0.5 border border-zinc-700">
+                  <i class="fa-solid fa-handshake text-base"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-white text-base">민·관 원팀 파트너십 구축</h4>
+                  <p class="text-sm text-zinc-400 mt-1">4년간 65조 원 규모의 민간 투자가 적시에 이루어질 수 있도록 파격적인 세제 혜택과 규제 샌드박스 패키지 지원</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Committee Subcommittees -->
+          <div class="lg:w-1/2 w-full">
+            <div class="p-6 sm:p-8 rounded-3xl bg-zinc-900 border border-zinc-800 shadow-xl relative">
+              <div class="text-center pb-6 border-b border-zinc-800">
+                <span class="text-xs font-semibold text-zinc-400 tracking-wider uppercase">National AI Strategy Committee</span>
+                <h3 class="text-xl font-bold text-white mt-1">대통령 직속 8대 핵심 분과위원회</h3>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3 mt-6">
+                <div class="p-3.5 rounded-xl bg-zinc-850 border border-zinc-800 flex items-center gap-3">
+                  <span class="w-8 h-8 rounded-lg bg-zinc-800 text-zinc-200 border border-zinc-700 flex items-center justify-center text-xs"><i class="fa-solid fa-server"></i></span>
+                  <div>
+                    <div class="text-sm font-bold text-zinc-200">기술인프라 분과</div>
+                    <div class="text-[11px] text-zinc-400">컴퓨팅·데이터센터</div>
+                  </div>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-zinc-850 border border-zinc-800 flex items-center gap-3">
+                  <span class="w-8 h-8 rounded-lg bg-zinc-800 text-zinc-200 border border-zinc-700 flex items-center justify-center text-xs"><i class="fa-solid fa-industry"></i></span>
+                  <div>
+                    <div class="text-sm font-bold text-zinc-200">산업 AX 분과</div>
+                    <div class="text-[11px] text-zinc-400">제조·물류·모빌리티</div>
+                  </div>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-zinc-850 border border-zinc-800 flex items-center gap-3">
+                  <span class="w-8 h-8 rounded-lg bg-zinc-800 text-zinc-200 border border-zinc-700 flex items-center justify-center text-xs"><i class="fa-solid fa-landmark"></i></span>
+                  <div>
+                    <div class="text-sm font-bold text-zinc-200">공공 AX 분과</div>
+                    <div class="text-[11px] text-zinc-400">행정 지능화·대국민 서비스</div>
+                  </div>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-zinc-850 border border-zinc-800 flex items-center gap-3">
+                  <span class="w-8 h-8 rounded-lg bg-zinc-800 text-zinc-200 border border-zinc-700 flex items-center justify-center text-xs"><i class="fa-solid fa-database"></i></span>
+                  <div>
+                    <div class="text-sm font-bold text-zinc-200">데이터 생태계 분과</div>
+                    <div class="text-[11px] text-zinc-400">고품질 학습데이터 개방</div>
+                  </div>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-zinc-850 border border-zinc-800 flex items-center gap-3">
+                  <span class="w-8 h-8 rounded-lg bg-zinc-800 text-zinc-200 border border-zinc-700 flex items-center justify-center text-xs"><i class="fa-solid fa-shield-halved"></i></span>
+                  <div>
+                    <div class="text-sm font-bold text-zinc-200">안전·윤리 분과</div>
+                    <div class="text-[11px] text-zinc-400">신뢰성 및 규범 정립</div>
+                  </div>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-zinc-850 border border-zinc-800 flex items-center gap-3">
+                  <span class="w-8 h-8 rounded-lg bg-zinc-800 text-zinc-200 border border-zinc-700 flex items-center justify-center text-xs"><i class="fa-solid fa-globe"></i></span>
+                  <div>
+                    <div class="text-sm font-bold text-zinc-200">글로벌 협력 분과</div>
+                    <div class="text-[11px] text-zinc-400">국제 표준 및 AI 외교</div>
+                  </div>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-zinc-850 border border-zinc-800 flex items-center gap-3">
+                  <span class="w-8 h-8 rounded-lg bg-zinc-800 text-zinc-200 border border-zinc-700 flex items-center justify-center text-xs"><i class="fa-solid fa-graduation-cap"></i></span>
+                  <div>
+                    <div class="text-sm font-bold text-zinc-200">인재 양성 분과</div>
+                    <div class="text-[11px] text-zinc-400">고급 연구인력·SW 교육</div>
+                  </div>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-zinc-850 border border-zinc-800 flex items-center gap-3">
+                  <span class="w-8 h-8 rounded-lg bg-zinc-800 text-zinc-200 border border-zinc-700 flex items-center justify-center text-xs"><i class="fa-solid fa-scale-balanced"></i></span>
+                  <div>
+                    <div class="text-sm font-bold text-zinc-200">법·제도 혁신 분과</div>
+                    <div class="text-[11px] text-zinc-400">기본법 하위법령 정비</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-zinc-800 text-center">
+                <span class="text-xs text-zinc-400">국가 최고 의결 기구로서 범정부 AI 실행 계획(AI Action Plan) 점검</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 2: 6 CORE POLICY PILLARS ==================== -->
+    <section id="policies" class="py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 text-zinc-300 text-xs font-semibold mb-3 border border-zinc-700">
+            Strategic Pillars
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
+            대한민국을 바꾸는 <span class="gradient-text">6대 핵심 AI 정책</span>
+          </h2>
+          <p class="text-zinc-400 mt-3 text-base sm:text-lg">
+            거버넌스, 인프라, 법률, 산업 전환, 안전 검증까지 대한민국 AI 전주기 생태계를 지탱하는 국가 핵심 과제입니다.
+          </p>
+        </div>
+
+        <!-- 6 Cards Grid (Calm Monochrome) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <!-- Card 1: 인공지능기본법 -->
+          <div class="glass-card rounded-2xl p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-zinc-800 text-zinc-200 border border-zinc-700 flex items-center justify-center text-xl mb-6">
+                <i class="fa-solid fa-gavel"></i>
+              </div>
+              <span class="text-xs font-semibold text-zinc-400 uppercase tracking-wider">법률 및 제도</span>
+              <h3 class="text-xl font-bold text-white mt-1 mb-3">인공지능기본법 제정 및 시행</h3>
+              <p class="text-sm text-zinc-400 leading-relaxed mb-4">
+                '우선 허용·사후 규제' 원칙으로 신기술 개발을 장려하고, 국민의 생명·안전과 직결된 고영향 AI에 대한 투명성 검증과 워터마크 표시 의무를 명문화했습니다.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-zinc-800 flex items-center justify-between text-xs text-zinc-400">
+              <span class="inline-flex items-center gap-1.5"><i class="fa-solid fa-check text-zinc-300"></i> 규제 불확실성 해소</span>
+              <a href="#basic-act" class="text-zinc-300 hover:text-white font-medium">자세히 보기 &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Card 2: 국가 AI 컴퓨팅 센터 -->
+          <div class="glass-card rounded-2xl p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-zinc-800 text-zinc-200 border border-zinc-700 flex items-center justify-center text-xl mb-6">
+                <i class="fa-solid fa-network-wired"></i>
+              </div>
+              <span class="text-xs font-semibold text-zinc-400 uppercase tracking-wider">국가 컴퓨팅 인프라</span>
+              <h3 class="text-xl font-bold text-white mt-1 mb-3">국가 AI 컴퓨팅 센터 (AI 고속도로)</h3>
+              <p class="text-sm text-zinc-400 leading-relaxed mb-4">
+                정부-민간 합작 SPC를 통해 2030년까지 1EF(엑사플롭스)급 첨단 컴퓨팅 자원을 구축하여 산·학·연에 고성능 GPU와 저렴한 클라우드 환경을 지원합니다.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-zinc-800 flex items-center justify-between text-xs text-zinc-400">
+              <span class="inline-flex items-center gap-1.5"><i class="fa-solid fa-check text-zinc-300"></i> 첨단 GPU 대규모 확충</span>
+              <a href="#infrastructure" class="text-zinc-300 hover:text-white font-medium">자세히 보기 &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Card 3: 소버린 AI 및 K-클라우드 -->
+          <div class="glass-card rounded-2xl p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-zinc-800 text-zinc-200 border border-zinc-700 flex items-center justify-center text-xl mb-6">
+                <i class="fa-solid fa-microchip"></i>
+              </div>
+              <span class="text-xs font-semibold text-zinc-400 uppercase tracking-wider">기술 주권 및 하드웨어</span>
+              <h3 class="text-xl font-bold text-white mt-1 mb-3">소버린 AI & K-클라우드 프로젝트</h3>
+              <p class="text-sm text-zinc-400 leading-relaxed mb-4">
+                외산 칩셋 의존도를 낮추기 위해 국산 AI 반도체(NPU, 저전력 PIM)를 집중 육성하고 데이터센터에 실증 적용하는 국산 풀스택 생태계를 완성합니다.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-zinc-800 flex items-center justify-between text-xs text-zinc-400">
+              <span class="inline-flex items-center gap-1.5"><i class="fa-solid fa-check text-zinc-300"></i> 국산 NPU/PIM 국산화</span>
+              <a href="#infrastructure" class="text-zinc-300 hover:text-white font-medium">자세히 보기 &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Card 4: AI 안전연구소 (K-AISI) -->
+          <div class="glass-card rounded-2xl p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-zinc-800 text-zinc-200 border border-zinc-700 flex items-center justify-center text-xl mb-6">
+                <i class="fa-solid fa-shield-cat"></i>
+              </div>
+              <span class="text-xs font-semibold text-zinc-400 uppercase tracking-wider">신뢰성 및 안전 검증</span>
+              <h3 class="text-xl font-bold text-white mt-1 mb-3">AI 안전연구소(K-AISI) 설립</h3>
+              <p class="text-sm text-zinc-400 leading-relaxed mb-4">
+                'AI 서울 정상회의' 후속 조치로 출범한 국가 전담 평가 기구로서 환각, 오남용, 사이버 위협, 통제 상실 등 고위험 요인을 사전 검증·대응합니다.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-zinc-800 flex items-center justify-between text-xs text-zinc-400">
+              <span class="inline-flex items-center gap-1.5"><i class="fa-solid fa-check text-zinc-300"></i> 글로벌 안전 네트워크 공조</span>
+              <button onclick="openModal('safetyModal')" class="text-zinc-300 hover:text-white font-medium">안전 규범 &rarr;</button>
+            </div>
+          </div>
+
+          <!-- Card 5: 전 산업 AI 대전환 (AX 2.0) -->
+          <div class="glass-card rounded-2xl p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-zinc-800 text-zinc-200 border border-zinc-700 flex items-center justify-center text-xl mb-6">
+                <i class="fa-solid fa-robot"></i>
+              </div>
+              <span class="text-xs font-semibold text-zinc-400 uppercase tracking-wider">산업 생산성 혁명</span>
+              <h3 class="text-xl font-bold text-white mt-1 mb-3">전 산업 AX & 피지컬 AI 육성</h3>
+              <p class="text-sm text-zinc-400 leading-relaxed mb-4">
+                제조, 조선, 자동차, 바이오 등 한국 주력 산업에 AI를 결합하고, 자율적으로 과업을 수행하는 '에이전틱 AI'와 로보틱스 기반 '피지컬 AI'를 선점합니다.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-zinc-800 flex items-center justify-between text-xs text-zinc-400">
+              <span class="inline-flex items-center gap-1.5"><i class="fa-solid fa-check text-zinc-300"></i> 제조·로봇 AI 융합</span>
+              <button onclick="openModal('axModal')" class="text-zinc-300 hover:text-white font-medium">AX 사례보기 &rarr;</button>
+            </div>
+          </div>
+
+          <!-- Card 6: 공공·국민 AI 일상화 -->
+          <div class="glass-card rounded-2xl p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-zinc-800 text-zinc-200 border border-zinc-700 flex items-center justify-center text-xl mb-6">
+                <i class="fa-solid fa-people-roof"></i>
+              </div>
+              <span class="text-xs font-semibold text-zinc-400 uppercase tracking-wider">포용적 AI 복지</span>
+              <h3 class="text-xl font-bold text-white mt-1 mb-3">공공 서비스 지능화 및 AI 리터러시</h3>
+              <p class="text-sm text-zinc-400 leading-relaxed mb-4">
+                민원 행정 편의, 복지 사각지대 발굴, 재난 조기 예측 등 대국민 체감 서비스를 혁신하고, 전 국민을 위한 디지털 AI 리터러시 교육을 확대합니다.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-zinc-800 flex items-center justify-between text-xs text-zinc-400">
+              <span class="inline-flex items-center gap-1.5"><i class="fa-solid fa-check text-zinc-300"></i> 모두를 위한 체감형 복지</span>
+              <button onclick="openModal('publicAxModal')" class="text-zinc-300 hover:text-white font-medium">공공 혜택 &rarr;</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 3: AI BASIC ACT ==================== -->
+    <section id="basic-act" class="py-20 bg-zinc-950/70 border-y border-zinc-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 text-zinc-300 text-xs font-semibold mb-3 border border-zinc-700">
+            Legal Framework
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
+            대한민국 <span class="gradient-text">「인공지능기본법」</span> 핵심 해설
+          </h2>
+          <p class="text-zinc-400 mt-2">
+            산업 진흥과 국민 신뢰 보호의 균형을 완성한 대한민국 최초의 종합 AI 법률 체계입니다.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Act Pillar 1 -->
+          <div class="bg-zinc-900 rounded-2xl p-7 border border-zinc-800 shadow-md">
+            <div class="w-10 h-10 rounded-lg bg-zinc-800 text-zinc-200 border border-zinc-700 flex items-center justify-center font-bold text-base mb-4">
+              01
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">우선 허용 · 사후 규제</h3>
+            <p class="text-sm text-zinc-400 leading-relaxed mb-4">
+              AI 기술과 서비스 출시는 원칙적으로 전면 허용하되, 사후에 발생할 수 있는 위험이나 부작용을 점검·보완하는 유연한 규제 방식을 채택하여 스타트업의 진입 장벽을 낮춥니다.
+            </p>
+            <ul class="text-xs text-zinc-400 space-y-2">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-zinc-300"></i> 사전 인허가 규제 최소화</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-zinc-300"></i> 규제 샌드박스 및 실증 특례 지원</li>
+            </ul>
+          </div>
+
+          <!-- Act Pillar 2 -->
+          <div class="bg-zinc-900 rounded-2xl p-7 border border-zinc-800 shadow-md">
+            <div class="w-10 h-10 rounded-lg bg-zinc-800 text-zinc-200 border border-zinc-700 flex items-center justify-center font-bold text-base mb-4">
+              02
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">고영향 AI 안전 책무</h3>
+            <p class="text-sm text-zinc-400 leading-relaxed mb-4">
+              의료, 생명, 원자력, 대출 심사, 인사 채용 등 사람의 생명과 기본권에 중대한 영향을 미치는 '고영향 AI' 개발 시 신뢰성 확보 계획 수립과 위험 관리 책무를 부과합니다.
+            </p>
+            <ul class="text-xs text-zinc-400 space-y-2">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-zinc-300"></i> 알고리즘 설명 가능성 제고</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-zinc-300"></i> 위험성 사전 평가 및 기록 보관</li>
+            </ul>
+          </div>
+
+          <!-- Act Pillar 3 -->
+          <div class="bg-zinc-900 rounded-2xl p-7 border border-zinc-800 shadow-md">
+            <div class="w-10 h-10 rounded-lg bg-zinc-800 text-zinc-200 border border-zinc-700 flex items-center justify-center font-bold text-base mb-4">
+              03
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">워터마크 의무 & 기업 배려</h3>
+            <p class="text-sm text-zinc-400 leading-relaxed mb-4">
+              딥페이크 범죄와 정보 왜곡을 방지하기 위해 생성형 AI 제작물 표시를 의무화합니다. 반면 초기 기업의 과도한 부담을 방지하기 위해 계도기간 및 컨설팅을 제공합니다.
+            </p>
+            <ul class="text-xs text-zinc-400 space-y-2">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-zinc-300"></i> 가시적/비가시적 디지털 워터마크</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-zinc-300"></i> 중소기업 맞춤 규제 컨설팅 무료 제공</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Comparison Table (Monochrome) -->
+        <div class="mt-12 bg-zinc-900 rounded-2xl p-6 sm:p-8 border border-zinc-800">
+          <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+            <i class="fa-solid fa-scale-balanced text-zinc-300"></i>
+            인공지능기본법 시행에 따른 주체별 영향 및 기대 효과
+          </h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm text-zinc-300">
+              <thead class="text-xs uppercase bg-zinc-950 text-zinc-400 border-b border-zinc-800">
+                <tr>
+                  <th class="py-3 px-4">구분</th>
+                  <th class="py-3 px-4 text-zinc-200">기업 및 개발자 (진흥 측면)</th>
+                  <th class="py-3 px-4 text-zinc-200">국민 및 이용자 (안전·신뢰 측면)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-zinc-800">
+                <tr>
+                  <td class="py-3.5 px-4 font-semibold text-white">기술 개발</td>
+                  <td class="py-3.5 px-4">예측 가능한 명확한 법적 테두리 제공, R&D 투자 보조금 지원</td>
+                  <td class="py-3.5 px-4">검증된 안전한 혁신 서비스 조기 이용</td>
+                </tr>
+                <tr>
+                  <td class="py-3.5 px-4 font-semibold text-white">위험 관리</td>
+                  <td class="py-3.5 px-4">정부 가이드라인 및 위험 평가 컨설팅 지원 (처벌 위주 지양)</td>
+                  <td class="py-3.5 px-4">고영향 AI 오작동 및 차별 피해로부터 권익 보호</td>
+                </tr>
+                <tr>
+                  <td class="py-3.5 px-4 font-semibold text-white">정보 투명성</td>
+                  <td class="py-3.5 px-4">표준화된 워터마크 기술 도입으로 국제 신뢰도 획득</td>
+                  <td class="py-3.5 px-4">딥페이크 가짜 뉴스로부터 혼란 방지 및 진위 식별</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 4: SOVEREIGN AI & INFRASTRUCTURE MAP ==================== -->
+    <section id="infrastructure" class="py-24 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 text-zinc-300 text-xs font-semibold mb-3 border border-zinc-700">
+            Hardware & Cloud Sovereignty
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
+            기술 주권을 지키는 <span class="gradient-text">소버린 AI & K-클라우드</span>
+          </h2>
+          <p class="text-zinc-400 mt-2 text-base sm:text-lg">
+            해외 빅테크 종속을 방지하고 [반도체 &rarr; 데이터센터 &rarr; 파운데이션 모델 &rarr; 서비스]로 이어지는 독자 풀스택 생태계를 구축합니다.
+          </p>
+        </div>
+
+        <!-- Full Stack Diagram (Calm Monochrome Grid) -->
+        <div class="relative bg-zinc-900 rounded-3xl p-6 sm:p-10 border border-zinc-800 shadow-xl">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+            
+            <!-- Step 1 -->
+            <div class="p-5 rounded-2xl bg-zinc-850 border border-zinc-700/80 relative">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold text-zinc-300 tracking-wider">LAYER 1</span>
+                <span class="w-7 h-7 rounded-full bg-zinc-800 text-zinc-300 border border-zinc-700 flex items-center justify-center text-xs"><i class="fa-solid fa-microchip"></i></span>
+              </div>
+              <h4 class="text-lg font-bold text-white mb-2">국산 AI 반도체</h4>
+              <p class="text-xs text-zinc-400 leading-relaxed mb-3">
+                초고속·저전력 NPU 및 차세대 PIM(지능형 메모리) 기술 집중 R&D를 통해 독점 구조 극복
+              </p>
+              <div class="text-[11px] text-zinc-300 font-medium bg-zinc-950 p-2 rounded-lg border border-zinc-800">
+                팹리스 육성 · HBM 연계
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="p-5 rounded-2xl bg-zinc-850 border border-zinc-700/80 relative">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold text-zinc-300 tracking-wider">LAYER 2</span>
+                <span class="w-7 h-7 rounded-full bg-zinc-800 text-zinc-300 border border-zinc-700 flex items-center justify-center text-xs"><i class="fa-solid fa-server"></i></span>
+              </div>
+              <h4 class="text-lg font-bold text-white mb-2">국가 AI 컴퓨팅 센터</h4>
+              <p class="text-xs text-zinc-400 leading-relaxed mb-3">
+                민관 합작 SPC를 통해 1EF(엑사플롭스) 규모의 초거대 컴퓨팅 센터 건립 및 저렴한 연산 자원 공급
+              </p>
+              <div class="text-[11px] text-zinc-300 font-medium bg-zinc-950 p-2 rounded-lg border border-zinc-800">
+                국산 NPU 실증 및 26만+ GPU 연계
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="p-5 rounded-2xl bg-zinc-850 border border-zinc-700/80 relative">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold text-zinc-300 tracking-wider">LAYER 3</span>
+                <span class="w-7 h-7 rounded-full bg-zinc-800 text-zinc-300 border border-zinc-700 flex items-center justify-center text-xs"><i class="fa-solid fa-brain"></i></span>
+              </div>
+              <h4 class="text-lg font-bold text-white mb-2">독자 파운데이션 모델</h4>
+              <p class="text-xs text-zinc-400 leading-relaxed mb-3">
+                한국어, 한국 법률·역사·문화를 가장 깊이 이해하고 국가 안보 데이터를 지키는 독자 LLM 구축
+              </p>
+              <div class="text-[11px] text-zinc-300 font-medium bg-zinc-950 p-2 rounded-lg border border-zinc-800">
+                소버린 데이터 주권 수호
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="p-5 rounded-2xl bg-zinc-850 border border-zinc-700/80 relative">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold text-zinc-300 tracking-wider">LAYER 4</span>
+                <span class="w-7 h-7 rounded-full bg-zinc-800 text-zinc-300 border border-zinc-700 flex items-center justify-center text-xs"><i class="fa-solid fa-industry"></i></span>
+              </div>
+              <h4 class="text-lg font-bold text-white mb-2">산업별 AX 적용</h4>
+              <p class="text-xs text-zinc-400 leading-relaxed mb-3">
+                제조공정 자동화, 신약 발굴, 자율운항 선박, 국방 경계 시스템 등 국가 실물 경제 전반의 생산성 폭발
+              </p>
+              <div class="text-[11px] text-zinc-300 font-medium bg-zinc-950 p-2 rounded-lg border border-zinc-800">
+                피지컬 AI & 에이전틱 솔루션
+              </div>
+            </div>
+
+          </div>
+
+          <!-- K-Cloud Roadmap Progress Bar (Monochrome) -->
+          <div class="mt-10 pt-8 border-t border-zinc-800">
+            <h4 class="text-sm font-bold text-zinc-200 mb-4 flex items-center gap-2">
+              <i class="fa-solid fa-stairs text-zinc-400"></i> K-클라우드 프로젝트 3단계 기술 진화 로드맵
+            </h4>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+              <div class="p-4 rounded-xl bg-zinc-950 border-l-2 border-white">
+                <span class="font-bold text-white">1단계 (추진완료/확산)</span>
+                <p class="text-zinc-200 font-semibold mt-1">국산 NPU 데이터센터 실증</p>
+                <p class="text-zinc-400 mt-1">국산 NPU 기반 추론 서버 고도화 및 레퍼런스 확보</p>
+              </div>
+              <div class="p-4 rounded-xl bg-zinc-950 border-l-2 border-zinc-400">
+                <span class="font-bold text-zinc-300">2단계 (본격 상용화)</span>
+                <p class="text-zinc-200 font-semibold mt-1">DRAM 기반 저전력 PIM</p>
+                <p class="text-zinc-400 mt-1">메모리 내 연산(PIM) 적용으로 초저전력 연산 인프라 완성</p>
+              </div>
+              <div class="p-4 rounded-xl bg-zinc-950 border-l-2 border-zinc-600">
+                <span class="font-bold text-zinc-400">3단계 (글로벌 선점)</span>
+                <p class="text-zinc-200 font-semibold mt-1">차세대 극저전력 PIM & Full-Stack</p>
+                <p class="text-zinc-400 mt-1">비휘발성 메모리 결합 극저전력 AI 반도체 세계 최고 수준 도달</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 5: ROADMAP TIMELINE ==================== -->
+    <section id="roadmap" class="py-20 bg-zinc-950/70 border-y border-zinc-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 text-zinc-300 text-xs font-semibold mb-3 border border-zinc-700">
+            Timeline
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
+            대한민국 AI <span class="gradient-text">2030 마일스톤</span>
+          </h2>
+          <p class="text-zinc-400 mt-2">
+            주요 성과부터 미래 비전까지 한눈에 살펴보는 국가 정책 발전 타임라인입니다.
+          </p>
+        </div>
+
+        <div class="relative max-w-4xl mx-auto">
+          <!-- Vertical Monochrome Line -->
+          <div class="absolute left-4 sm:left-1/2 top-0 bottom-0 w-0.5 bg-zinc-700 -translate-x-1/2"></div>
+
+          <!-- Timeline Item 1 -->
+          <div class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-12 group">
+            <div class="w-full sm:w-1/2 sm:text-right sm:pr-8 pl-10 sm:pl-0">
+              <span class="text-xs font-extrabold text-zinc-300 px-2.5 py-1 rounded bg-zinc-800 border border-zinc-700">2024년 5월 ~ 12월</span>
+              <h4 class="text-lg font-bold text-white mt-2">글로벌 규범 주도 & 법적 기틀 마련</h4>
+              <p class="text-sm text-zinc-400 mt-1">
+                AI 서울 정상회의 개최(서울 선언), 전담 기구인 AI 안전연구소(K-AISI) 출범, 국회 「인공지능기본법」 본회의 통과
+              </p>
+            </div>
+            <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-white border-4 border-zinc-950 shadow-md"></div>
+            <div class="hidden sm:block sm:w-1/2 sm:pl-8"></div>
+          </div>
+
+          <!-- Timeline Item 2 -->
+          <div class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-12 group">
+            <div class="hidden sm:block sm:w-1/2 sm:pr-8"></div>
+            <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-zinc-300 border-4 border-zinc-950 shadow-md"></div>
+            <div class="w-full sm:w-1/2 pl-10 sm:pl-8">
+              <span class="text-xs font-extrabold text-zinc-300 px-2.5 py-1 rounded bg-zinc-800 border border-zinc-700">2025년</span>
+              <h4 class="text-lg font-bold text-white mt-2">국가 거버넌스 전면 개편</h4>
+              <p class="text-sm text-zinc-400 mt-1">
+                대통령 직속 '국가인공지능전략위원회' 공식 출범, 범국가 'AI 행동계획(Action Plan)' 발표 및 인공지능기본법 공포
+              </p>
+            </div>
+          </div>
+
+          <!-- Timeline Item 3 -->
+          <div class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-12 group">
+            <div class="w-full sm:w-1/2 sm:text-right sm:pr-8 pl-10 sm:pl-0">
+              <span class="text-xs font-extrabold text-zinc-300 px-2.5 py-1 rounded bg-zinc-800 border border-zinc-700">2026년</span>
+              <h4 class="text-lg font-bold text-white mt-2">인공지능기본법 본격 시행</h4>
+              <p class="text-sm text-zinc-400 mt-1">
+                인공지능기본법 전면 효력 개시, 국가 AI 컴퓨팅 센터 1단계 인프라 가동, 산업 전 분야 AI 바우처 및 AX 확산
+              </p>
+            </div>
+            <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-zinc-400 border-4 border-zinc-950 shadow-md"></div>
+            <div class="hidden sm:block sm:w-1/2 sm:pl-8"></div>
+          </div>
+
+          <!-- Timeline Item 4 -->
+          <div class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6 group">
+            <div class="hidden sm:block sm:w-1/2 sm:pr-8"></div>
+            <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-zinc-500 border-4 border-zinc-950 shadow-md"></div>
+            <div class="w-full sm:w-1/2 pl-10 sm:pl-8">
+              <span class="text-xs font-extrabold text-zinc-400 px-2.5 py-1 rounded bg-zinc-800 border border-zinc-700">2027 ~ 2030년</span>
+              <h4 class="text-lg font-bold text-white mt-2">글로벌 AI 3대 강국(G3) 완성</h4>
+              <p class="text-sm text-zinc-400 mt-1">
+                1EF 컴퓨팅 인프라 완성, 피지컬 AI 기반 제조업 수출 1위 품목화, 전 국민이 체감하는 신뢰 기반 AI 선도 사회 구현
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 6: INTERACTIVE POLICY FINDER ==================== -->
+    <section id="interactive" class="py-24 relative">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 text-zinc-300 text-xs font-semibold mb-3 border border-zinc-700">
+            Interactive Finder
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
+            나에게 맞는 <span class="gradient-text">국가 AI 정책 지원 찾기</span>
+          </h2>
+          <p class="text-zinc-400 mt-2 text-sm sm:text-base">
+            기업 형태나 이용자 유형을 선택하시면 맞춤형 정부 지원 제도와 준수사항을 즉시 안내합니다.
+          </p>
+        </div>
+
+        <!-- Filter Selector Buttons (Monochrome Style) -->
+        <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8" id="roleFilterButtons">
+          <button onclick="filterPolicy('startup', this)" data-role="startup" class="policy-tab active px-5 py-2.5 rounded-xl text-sm font-semibold transition-all bg-white text-zinc-950 shadow-sm">
+            <i class="fa-solid fa-rocket mr-1.5 text-zinc-700"></i> AI 스타트업 · 중소기업
+          </button>
+          <button onclick="filterPolicy('enterprise', this)" data-role="enterprise" class="policy-tab px-5 py-2.5 rounded-xl text-sm font-semibold transition-all bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800">
+            <i class="fa-solid fa-industry mr-1.5 text-zinc-500"></i> 전통 제조업 · 중견기업
+          </button>
+          <button onclick="filterPolicy('researcher', this)" data-role="researcher" class="policy-tab px-5 py-2.5 rounded-xl text-sm font-semibold transition-all bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800">
+            <i class="fa-solid fa-graduation-cap mr-1.5 text-zinc-500"></i> 연구자 · 대학원생
+          </button>
+          <button onclick="filterPolicy('citizen', this)" data-role="citizen" class="policy-tab px-5 py-2.5 rounded-xl text-sm font-semibold transition-all bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800">
+            <i class="fa-solid fa-user mr-1.5 text-zinc-500"></i> 일반 국민 · 구직자
+          </button>
+        </div>
+
+        <!-- Dynamic Content Card (Monochrome) -->
+        <div id="policyResultCard" class="glass-card rounded-3xl p-6 sm:p-10 border border-zinc-800 transition-all duration-300">
+          <!-- Dynamic Content rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== MODALS ==================== -->
+  <!-- Summary Report Modal -->
+  <div id="summaryModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
+    <div class="bg-zinc-950 border border-zinc-800 rounded-2xl max-w-2xl w-full p-6 sm:p-8 max-h-[90vh] overflow-y-auto relative">
+      <button onclick="closeModal('summaryModal')" class="absolute top-5 right-5 text-zinc-400 hover:text-white text-xl">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="w-10 h-10 rounded-xl bg-zinc-800 text-zinc-200 border border-zinc-700 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-file-contract"></i>
+        </span>
+        <div>
+          <h3 class="text-xl font-bold text-white">대한민국 AI 정책 핵심 브리프</h3>
+          <p class="text-xs text-zinc-400">대한민국 국가인공지능 정책 총괄 요약문</p>
+        </div>
+      </div>
+      <div class="space-y-4 text-sm text-zinc-300 leading-relaxed border-t border-zinc-800 pt-4">
+        <div class="p-4 rounded-xl bg-zinc-900 border border-zinc-800">
+          <h4 class="font-bold text-white mb-1">1. 국가적 목표</h4>
+          <p class="text-zinc-400 text-xs sm:text-sm">미국, 중국에 이은 글로벌 AI 3대 강국(AI G3) 도약 및 소버린 인프라 확립을 통해 디지털 기술 주권을 수호합니다.</p>
+        </div>
+        <div class="p-4 rounded-xl bg-zinc-900 border border-zinc-800">
+          <h4 class="font-bold text-white mb-1">2. 법과 규제의 합리화</h4>
+          <p class="text-zinc-400 text-xs sm:text-sm">「인공지능기본법」은 혁신을 가로막지 않는 ‘우선 허용·사후 규제’ 원칙을 천명하되, 고영향 AI 위험 평가 및 워터마크 표시로 신뢰성 울타리를 제공합니다.</p>
+        </div>
+        <div class="p-4 rounded-xl bg-zinc-900 border border-zinc-800">
+          <h4 class="font-bold text-white mb-1">3. 하드웨어와 자립성</h4>
+          <p class="text-zinc-400 text-xs sm:text-sm">국산 NPU와 저전력 PIM을 데이터센터에 실증하는 K-클라우드 사업과 민관 합동 국가 AI 컴퓨팅 센터를 통해 기술 독립을 달성합니다.</p>
+        </div>
+      </div>
+      <div class="mt-6 flex justify-end">
+        <button onclick="closeModal('summaryModal')" class="px-5 py-2.5 rounded-lg bg-white hover:bg-zinc-200 text-zinc-950 font-semibold text-sm transition-colors">
+          확인 완료
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Safety Modal -->
+  <div id="safetyModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
+    <div class="bg-zinc-950 border border-zinc-800 rounded-2xl max-w-lg w-full p-6 sm:p-8 relative">
+      <button onclick="closeModal('safetyModal')" class="absolute top-5 right-5 text-zinc-400 hover:text-white text-xl">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="w-10 h-10 rounded-xl bg-zinc-800 text-zinc-200 border border-zinc-700 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-shield-halved"></i>
+        </span>
+        <h3 class="text-xl font-bold text-white">AI 안전연구소 (K-AISI)</h3>
+      </div>
+      <p class="text-sm text-zinc-400 leading-relaxed mb-4">
+        AI 안전연구소는 인공지능이 야기할 수 있는 심각한 사이버 안보 침해, 환각(Hallucination), 사회적 편향, 딥페이크 악용 위험을 과학적으로 측정하고 검증하는 국가 공인 전문기관입니다.
+      </p>
+      <div class="p-4 rounded-xl bg-zinc-900 border border-zinc-800 text-xs text-zinc-300 space-y-2">
+        <div class="font-bold text-zinc-200"><i class="fa-solid fa-check mr-1.5 text-zinc-400"></i> 글로벌 안전 파트너십</div>
+        <p class="text-zinc-400">미국 AISI, 영국 AISI, 일본 AISI 등과 연계하여 국제 표준 테스트베드를 공동 운영합니다.</p>
+      </div>
+      <div class="mt-6 flex justify-end">
+        <button onclick="closeModal('safetyModal')" class="px-5 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-white text-sm font-medium">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AX Modal -->
+  <div id="axModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
+    <div class="bg-zinc-950 border border-zinc-800 rounded-2xl max-w-lg w-full p-6 sm:p-8 relative">
+      <button onclick="closeModal('axModal')" class="absolute top-5 right-5 text-zinc-400 hover:text-white text-xl">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="w-10 h-10 rounded-xl bg-zinc-800 text-zinc-200 border border-zinc-700 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-industry"></i>
+        </span>
+        <h3 class="text-xl font-bold text-white">산업 AX & 피지컬 AI 프로젝트</h3>
+      </div>
+      <p class="text-sm text-zinc-400 leading-relaxed mb-4">
+        한국의 핵심 경쟁력인 하드웨어 제조(반도체, 자동차, 조선, 배터리)에 AI의 두뇌를 결합합니다. 피지컬 AI는 소프트웨어를 넘어 실제 공장 설비와 로봇을 자율 제어합니다.
+      </p>
+      <div class="space-y-2 text-xs text-zinc-400">
+        <div class="p-2.5 rounded bg-zinc-900 border border-zinc-800"><strong class="text-zinc-200">조선·해운:</strong> AI 자율운항 선박 및 스마트 야드 공정 자동화</div>
+        <div class="p-2.5 rounded bg-zinc-900 border border-zinc-800"><strong class="text-zinc-200">바이오·의료:</strong> 국가 바이오 데이터와 AI 결합으로 신약 개발 주기 50% 단축</div>
+      </div>
+      <div class="mt-6 flex justify-end">
+        <button onclick="closeModal('axModal')" class="px-5 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-white text-sm font-medium">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Public AX Modal -->
+  <div id="publicAxModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
+    <div class="bg-zinc-950 border border-zinc-800 rounded-2xl max-w-lg w-full p-6 sm:p-8 relative">
+      <button onclick="closeModal('publicAxModal')" class="absolute top-5 right-5 text-zinc-400 hover:text-white text-xl">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="w-10 h-10 rounded-xl bg-zinc-800 text-zinc-200 border border-zinc-700 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-heart-pulse"></i>
+        </span>
+        <h3 class="text-xl font-bold text-white">공공 행정 및 국민 체감 복지 AX</h3>
+      </div>
+      <p class="text-sm text-zinc-400 leading-relaxed mb-4">
+        AI 기술을 통해 국가 행정 서비스를 24시간 365일 초맞춤형으로 전환하고, 위기 가구를 선제적으로 감지하여 복지 사각지대를 완전히 없애는 것을 목표로 합니다.
+      </p>
+      <div class="space-y-2 text-xs text-zinc-300">
+        <div class="p-2.5 rounded bg-zinc-900 border border-zinc-800"><strong class="text-zinc-200">복지 위기 가구 선제 발굴:</strong> 단전, 단수, 건보료 체납 데이터를 결합한 조기 지원</div>
+        <div class="p-2.5 rounded bg-zinc-900 border border-zinc-800"><strong class="text-zinc-200">지능형 재난 조기 경보:</strong> 홍수, 산불, 도시 침수를 실시간 영상 AI로 분석해 즉각 대피 알림</div>
+      </div>
+      <div class="mt-6 flex justify-end">
+        <button onclick="closeModal('publicAxModal')" class="px-5 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-white text-sm font-medium">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-zinc-950 border-t border-zinc-800 text-zinc-400 text-xs py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-zinc-800">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-white text-black flex items-center justify-center font-bold">
+            K
+          </div>
+          <div>
+            <div class="text-white font-bold text-sm">대한민국 AI 국가 정책 포털</div>
+            <div class="text-[11px] text-zinc-500">인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 기반</div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-6 text-zinc-400 text-xs font-medium">
+          <a href="https://www.msit.go.kr" target="_blank" class="hover:text-white transition-colors">과학기술정보통신부</a>
+          <a href="https://www.nia.or.kr" target="_blank" class="hover:text-white transition-colors">한국지능정보사회진흥원 (NIA)</a>
+          <a href="https://www.nipa.kr" target="_blank" class="hover:text-white transition-colors">정보통신산업진흥원 (NIPA)</a>
+          <a href="https://www.iitp.kr" target="_blank" class="hover:text-white transition-colors">정보통신기획평가원 (IITP)</a>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-between text-zinc-500 gap-4 text-center sm:text-left">
+        <p>본 포털은 최근 대한민국 정부의 공식 AI 정책 동향, 인공지능기본법, 국가인공지능전략위원회 핵심 추진과제를 종합하여 제작된 단일 페이지 안내 웹사이트입니다.</p>
+        <p class="shrink-0">&copy; Republic of Korea AI Initiative. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+  <script>
+    // Data for Interactive Policy Finder (Calm Monochrome Styling)
+    const policyData = {
+      startup: {
+        title: "AI 스타트업 & 중소 혁신 벤처",
+        icon: "fa-rocket",
+        tag: "성장 및 실증 집중 지원",
+        benefits: [
+          {
+            title: "국가 고성능 컴퓨팅(GPU) 바우처 지원",
+            desc: "초기 AI 모델 학습 및 추론에 필요한 대규모 GPU 클라우드 비용을 최대 80% 이상 지원합니다."
+          },
+          {
+            title: "규제 샌드박스 및 법률 컨설팅 무료 제공",
+            desc: "인공지능기본법 준수 지원을 위해 고영향 AI 여부 판별 및 규제 리스크 사전 컨설팅을 제공합니다."
+          },
+          {
+            title: "K-클라우드 프로젝트 실증 참여 기회",
+            desc: "국산 AI 반도체(NPU) 기반 클라우드 실증 과제에 참여하여 신뢰할 수 있는 상용화 레퍼런스를 확보할 수 있습니다."
+          }
+        ],
+        obligations: "생성형 AI 서비스 배포 시 결과물에 워터마크 표시 필수, 고영향 AI 판정 시 투명성 가이드라인 준수"
+      },
+      enterprise: {
+        title: "전통 제조 기업 & 중견기업 (산업 AX)",
+        icon: "fa-industry",
+        tag: "제조 공정 AI 대전환(AX)",
+        benefits: [
+          {
+            title: "산업 AX(AI 전환) 융합 바우처",
+            desc: "공정 불량 검출, 스마트 팩토리 제어, 물류 자동화 등 실질적인 생산성 향상 AI 솔루션 도입 비용을 정부가 지원합니다."
+          },
+          {
+            title: "피지컬 AI & 로보틱스 R&D 세제 혜택",
+            desc: "제조 라인에 자율 로봇 및 AI 제어 장치를 도입하는 신성장 원천기술 투자에 대한 세액 공제를 제공합니다."
+          },
+          {
+            title: "산업 데이터 표준화 및 결합 지원",
+            desc: "폐쇄적인 제조 현장 데이터를 안전하게 비식별화하여 기업 맞춤형 산업 특화 LLM을 구축하도록 돕습니다."
+          }
+        ],
+        obligations: "근로자 안전 관련 자동화 기기 도입 시 사전 안전성 점검 및 인적 감독 체계 마련 권고"
+      },
+      researcher: {
+        title: "AI 연구원 · 교수 · 대학원생",
+        icon: "fa-graduation-cap",
+        tag: "독자 파운데이션 R&D",
+        benefits: [
+          {
+            title: "국가 AI 컴퓨팅 센터 연구용 연산 자원 배분",
+            desc: "국가 R&D 과제를 수행하는 대학 및 연구기관에 엑사플롭스급 초고성능 연산 자원을 우선 할당합니다."
+          },
+          {
+            title: "AI 안전연구소(K-AISI) 공동 연구 펠로우십",
+            desc: "AI 모델의 환각, 사이버 보안, 탈옥 방지 등 신뢰성 평가 알고리즘 개발을 위한 연구비를 전폭 지원합니다."
+          },
+          {
+            title: "해외 우수 연구기관 교류 및 파견 지원",
+            desc: "글로벌 AI 톱티어 연구진과의 공동 프로젝트 및 현지 파견 연구 경비를 정부가 지원합니다."
+          }
+        ],
+        obligations: "연구 결과물에 대한 안전성·윤리 체크리스트 검증 및 공공 데이터 활용 규정 준수"
+      },
+      citizen: {
+        title: "일반 국민 · 취업 준비생 · 소비자",
+        icon: "fa-user",
+        tag: "안전한 AI 혜택 체감",
+        benefits: [
+          {
+            title: "딥페이크 및 가짜 뉴스 판별 보호",
+            desc: "기본법에 따른 워터마크 의무화로 합성 미디어 여부를 쉽게 식별할 수 있어 사기·피싱 범죄로부터 안전해집니다."
+          },
+          {
+            title: "전 국민 무료 AI 리터러시 & 실무 교육",
+            desc: "초보자부터 실무 취업 준비생까지 수준별 생성형 AI 활용법 및 코딩 교육을 국비 무료로 수강할 수 있습니다."
+          },
+          {
+            title: "24시간 지능형 공공·행정 원스톱 서비스",
+            desc: "각종 복지 신청, 세무 상담, 민원 처리를 기다림 없이 자연어로 해결하는 차세대 AI 정부 서비스를 누릴 수 있습니다."
+          }
+        ],
+        obligations: "타인의 초상권·개인정보를 무단 도용한 비윤리적 생성물 배포 금지 및 건전한 AI 이용 문화 동참"
+      }
+    };
+
+    function filterPolicy(role, clickedBtn) {
+      // Update Tab Styles
+      const buttons = document.querySelectorAll('#roleFilterButtons .policy-tab');
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-white', 'text-zinc-950', 'shadow-sm');
+        btn.classList.add('bg-zinc-900', 'text-zinc-400', 'border', 'border-zinc-800');
+      });
+      
+      const targetBtn = clickedBtn || document.querySelector(`#roleFilterButtons button[data-role="${role}"]`);
+      if (targetBtn) {
+        targetBtn.classList.remove('bg-zinc-900', 'text-zinc-400', 'border-zinc-800');
+        targetBtn.classList.add('bg-white', 'text-zinc-950', 'shadow-sm');
+      }
+
+      // Render Content
+      const data = policyData[role];
+      const card = document.getElementById('policyResultCard');
+      if (!data || !card) return;
+      
+      card.innerHTML = `
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-zinc-800">
+          <div class="flex items-center gap-3">
+            <span class="w-12 h-12 rounded-2xl bg-zinc-800 border border-zinc-700 text-zinc-200 flex items-center justify-center text-2xl shadow-inner">
+              <i class="fa-solid ${data.icon}"></i>
+            </span>
+            <div>
+              <span class="text-xs font-semibold text-zinc-400 tracking-wide uppercase">${data.tag}</span>
+              <h3 class="text-2xl font-bold text-white">${data.title}</h3>
+            </div>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-zinc-800 text-zinc-300 text-xs border border-zinc-700">
+            정부 공인 맞춤 정책
+          </span>
+        </div>
+
+        <div class="mt-6">
+          <h4 class="text-sm font-bold text-zinc-200 mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-gift text-zinc-400"></i> 주요 지원 혜택 (Key Benefits)
+          </h4>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            ${data.benefits.map(b => `
+              <div class="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 hover:border-zinc-700 transition-colors">
+                <h5 class="text-white font-bold text-sm mb-1.5">${b.title}</h5>
+                <p class="text-xs text-zinc-400 leading-relaxed">${b.desc}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="mt-6 pt-5 border-t border-zinc-800 flex items-start gap-3 text-xs bg-zinc-950 p-4 rounded-xl border border-zinc-850">
+          <i class="fa-solid fa-circle-exclamation text-zinc-400 text-base shrink-0 mt-0.5"></i>
+          <div>
+            <span class="font-bold text-zinc-200">주요 준수 및 유의 사항:</span>
+            <span class="text-zinc-400 ml-1">${data.obligations}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    // Initialize Default View
+    window.addEventListener('DOMContentLoaded', () => {
+      // Load initial role
+      const initialTab = document.querySelector('#roleFilterButtons .policy-tab');
+      if (initialTab) {
+        filterPolicy('startup', initialTab);
+      }
+
+      // Mobile menu toggle
+      const mobileBtn = document.getElementById('mobileMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      if (mobileBtn && mobileMenu) {
+        mobileBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+    });
+
+    // Modal Control Functions
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    // Close modal on escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.fixed.z-50').forEach(m => m.classList.add('hidden'));
+        document.body.style.overflow = 'auto';
+      }
+    });
+  </script>
+</body>
+</html>
